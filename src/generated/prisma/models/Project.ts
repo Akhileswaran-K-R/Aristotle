@@ -28,10 +28,22 @@ export type AggregateProject = {
 
 export type ProjectAvgAggregateOutputType = {
   healthScore: number | null
+  auditScore: number | null
+  governanceRisk: number | null
+  architecturalIntegrity: number | null
+  scalabilityReadiness: number | null
+  driftPercentage: number | null
+  refactorCostSprints: number | null
 }
 
 export type ProjectSumAggregateOutputType = {
   healthScore: number | null
+  auditScore: number | null
+  governanceRisk: number | null
+  architecturalIntegrity: number | null
+  scalabilityReadiness: number | null
+  driftPercentage: number | null
+  refactorCostSprints: number | null
 }
 
 export type ProjectMinAggregateOutputType = {
@@ -41,6 +53,16 @@ export type ProjectMinAggregateOutputType = {
   githubUrl: string | null
   healthScore: number | null
   createdAt: Date | null
+  auditRunId: string | null
+  auditDecision: string | null
+  auditScore: number | null
+  governanceRisk: number | null
+  architecturalIntegrity: number | null
+  scalabilityReadiness: number | null
+  requiresRevision: boolean | null
+  driftPercentage: number | null
+  refactorCostSprints: number | null
+  chiefReasoning: string | null
 }
 
 export type ProjectMaxAggregateOutputType = {
@@ -50,6 +72,16 @@ export type ProjectMaxAggregateOutputType = {
   githubUrl: string | null
   healthScore: number | null
   createdAt: Date | null
+  auditRunId: string | null
+  auditDecision: string | null
+  auditScore: number | null
+  governanceRisk: number | null
+  architecturalIntegrity: number | null
+  scalabilityReadiness: number | null
+  requiresRevision: boolean | null
+  driftPercentage: number | null
+  refactorCostSprints: number | null
+  chiefReasoning: string | null
 }
 
 export type ProjectCountAggregateOutputType = {
@@ -59,16 +91,40 @@ export type ProjectCountAggregateOutputType = {
   githubUrl: number
   healthScore: number
   createdAt: number
+  auditRunId: number
+  auditDecision: number
+  auditScore: number
+  governanceRisk: number
+  architecturalIntegrity: number
+  scalabilityReadiness: number
+  requiresRevision: number
+  driftPercentage: number
+  refactorCostSprints: number
+  blockingIssues: number
+  chiefReasoning: number
+  agentSummaries: number
   _all: number
 }
 
 
 export type ProjectAvgAggregateInputType = {
   healthScore?: true
+  auditScore?: true
+  governanceRisk?: true
+  architecturalIntegrity?: true
+  scalabilityReadiness?: true
+  driftPercentage?: true
+  refactorCostSprints?: true
 }
 
 export type ProjectSumAggregateInputType = {
   healthScore?: true
+  auditScore?: true
+  governanceRisk?: true
+  architecturalIntegrity?: true
+  scalabilityReadiness?: true
+  driftPercentage?: true
+  refactorCostSprints?: true
 }
 
 export type ProjectMinAggregateInputType = {
@@ -78,6 +134,16 @@ export type ProjectMinAggregateInputType = {
   githubUrl?: true
   healthScore?: true
   createdAt?: true
+  auditRunId?: true
+  auditDecision?: true
+  auditScore?: true
+  governanceRisk?: true
+  architecturalIntegrity?: true
+  scalabilityReadiness?: true
+  requiresRevision?: true
+  driftPercentage?: true
+  refactorCostSprints?: true
+  chiefReasoning?: true
 }
 
 export type ProjectMaxAggregateInputType = {
@@ -87,6 +153,16 @@ export type ProjectMaxAggregateInputType = {
   githubUrl?: true
   healthScore?: true
   createdAt?: true
+  auditRunId?: true
+  auditDecision?: true
+  auditScore?: true
+  governanceRisk?: true
+  architecturalIntegrity?: true
+  scalabilityReadiness?: true
+  requiresRevision?: true
+  driftPercentage?: true
+  refactorCostSprints?: true
+  chiefReasoning?: true
 }
 
 export type ProjectCountAggregateInputType = {
@@ -96,6 +172,18 @@ export type ProjectCountAggregateInputType = {
   githubUrl?: true
   healthScore?: true
   createdAt?: true
+  auditRunId?: true
+  auditDecision?: true
+  auditScore?: true
+  governanceRisk?: true
+  architecturalIntegrity?: true
+  scalabilityReadiness?: true
+  requiresRevision?: true
+  driftPercentage?: true
+  refactorCostSprints?: true
+  blockingIssues?: true
+  chiefReasoning?: true
+  agentSummaries?: true
   _all?: true
 }
 
@@ -192,6 +280,18 @@ export type ProjectGroupByOutputType = {
   githubUrl: string | null
   healthScore: number
   createdAt: Date
+  auditRunId: string | null
+  auditDecision: string | null
+  auditScore: number | null
+  governanceRisk: number | null
+  architecturalIntegrity: number | null
+  scalabilityReadiness: number | null
+  requiresRevision: boolean
+  driftPercentage: number | null
+  refactorCostSprints: number | null
+  blockingIssues: string[]
+  chiefReasoning: string | null
+  agentSummaries: runtime.JsonValue | null
   _count: ProjectCountAggregateOutputType | null
   _avg: ProjectAvgAggregateOutputType | null
   _sum: ProjectSumAggregateOutputType | null
@@ -224,6 +324,18 @@ export type ProjectWhereInput = {
   githubUrl?: Prisma.StringNullableFilter<"Project"> | string | null
   healthScore?: Prisma.IntFilter<"Project"> | number
   createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
+  auditRunId?: Prisma.StringNullableFilter<"Project"> | string | null
+  auditDecision?: Prisma.StringNullableFilter<"Project"> | string | null
+  auditScore?: Prisma.FloatNullableFilter<"Project"> | number | null
+  governanceRisk?: Prisma.FloatNullableFilter<"Project"> | number | null
+  architecturalIntegrity?: Prisma.FloatNullableFilter<"Project"> | number | null
+  scalabilityReadiness?: Prisma.FloatNullableFilter<"Project"> | number | null
+  requiresRevision?: Prisma.BoolFilter<"Project"> | boolean
+  driftPercentage?: Prisma.FloatNullableFilter<"Project"> | number | null
+  refactorCostSprints?: Prisma.FloatNullableFilter<"Project"> | number | null
+  blockingIssues?: Prisma.StringNullableListFilter<"Project">
+  chiefReasoning?: Prisma.StringNullableFilter<"Project"> | string | null
+  agentSummaries?: Prisma.JsonNullableFilter<"Project">
   tasks?: Prisma.TaskListRelationFilter
 }
 
@@ -234,6 +346,18 @@ export type ProjectOrderByWithRelationInput = {
   githubUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   healthScore?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  auditRunId?: Prisma.SortOrderInput | Prisma.SortOrder
+  auditDecision?: Prisma.SortOrderInput | Prisma.SortOrder
+  auditScore?: Prisma.SortOrderInput | Prisma.SortOrder
+  governanceRisk?: Prisma.SortOrderInput | Prisma.SortOrder
+  architecturalIntegrity?: Prisma.SortOrderInput | Prisma.SortOrder
+  scalabilityReadiness?: Prisma.SortOrderInput | Prisma.SortOrder
+  requiresRevision?: Prisma.SortOrder
+  driftPercentage?: Prisma.SortOrderInput | Prisma.SortOrder
+  refactorCostSprints?: Prisma.SortOrderInput | Prisma.SortOrder
+  blockingIssues?: Prisma.SortOrder
+  chiefReasoning?: Prisma.SortOrderInput | Prisma.SortOrder
+  agentSummaries?: Prisma.SortOrderInput | Prisma.SortOrder
   tasks?: Prisma.TaskOrderByRelationAggregateInput
 }
 
@@ -247,6 +371,18 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   githubUrl?: Prisma.StringNullableFilter<"Project"> | string | null
   healthScore?: Prisma.IntFilter<"Project"> | number
   createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
+  auditRunId?: Prisma.StringNullableFilter<"Project"> | string | null
+  auditDecision?: Prisma.StringNullableFilter<"Project"> | string | null
+  auditScore?: Prisma.FloatNullableFilter<"Project"> | number | null
+  governanceRisk?: Prisma.FloatNullableFilter<"Project"> | number | null
+  architecturalIntegrity?: Prisma.FloatNullableFilter<"Project"> | number | null
+  scalabilityReadiness?: Prisma.FloatNullableFilter<"Project"> | number | null
+  requiresRevision?: Prisma.BoolFilter<"Project"> | boolean
+  driftPercentage?: Prisma.FloatNullableFilter<"Project"> | number | null
+  refactorCostSprints?: Prisma.FloatNullableFilter<"Project"> | number | null
+  blockingIssues?: Prisma.StringNullableListFilter<"Project">
+  chiefReasoning?: Prisma.StringNullableFilter<"Project"> | string | null
+  agentSummaries?: Prisma.JsonNullableFilter<"Project">
   tasks?: Prisma.TaskListRelationFilter
 }, "id">
 
@@ -257,6 +393,18 @@ export type ProjectOrderByWithAggregationInput = {
   githubUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   healthScore?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  auditRunId?: Prisma.SortOrderInput | Prisma.SortOrder
+  auditDecision?: Prisma.SortOrderInput | Prisma.SortOrder
+  auditScore?: Prisma.SortOrderInput | Prisma.SortOrder
+  governanceRisk?: Prisma.SortOrderInput | Prisma.SortOrder
+  architecturalIntegrity?: Prisma.SortOrderInput | Prisma.SortOrder
+  scalabilityReadiness?: Prisma.SortOrderInput | Prisma.SortOrder
+  requiresRevision?: Prisma.SortOrder
+  driftPercentage?: Prisma.SortOrderInput | Prisma.SortOrder
+  refactorCostSprints?: Prisma.SortOrderInput | Prisma.SortOrder
+  blockingIssues?: Prisma.SortOrder
+  chiefReasoning?: Prisma.SortOrderInput | Prisma.SortOrder
+  agentSummaries?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ProjectCountOrderByAggregateInput
   _avg?: Prisma.ProjectAvgOrderByAggregateInput
   _max?: Prisma.ProjectMaxOrderByAggregateInput
@@ -274,6 +422,18 @@ export type ProjectScalarWhereWithAggregatesInput = {
   githubUrl?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
   healthScore?: Prisma.IntWithAggregatesFilter<"Project"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Project"> | Date | string
+  auditRunId?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
+  auditDecision?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
+  auditScore?: Prisma.FloatNullableWithAggregatesFilter<"Project"> | number | null
+  governanceRisk?: Prisma.FloatNullableWithAggregatesFilter<"Project"> | number | null
+  architecturalIntegrity?: Prisma.FloatNullableWithAggregatesFilter<"Project"> | number | null
+  scalabilityReadiness?: Prisma.FloatNullableWithAggregatesFilter<"Project"> | number | null
+  requiresRevision?: Prisma.BoolWithAggregatesFilter<"Project"> | boolean
+  driftPercentage?: Prisma.FloatNullableWithAggregatesFilter<"Project"> | number | null
+  refactorCostSprints?: Prisma.FloatNullableWithAggregatesFilter<"Project"> | number | null
+  blockingIssues?: Prisma.StringNullableListFilter<"Project">
+  chiefReasoning?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
+  agentSummaries?: Prisma.JsonNullableWithAggregatesFilter<"Project">
 }
 
 export type ProjectCreateInput = {
@@ -283,6 +443,18 @@ export type ProjectCreateInput = {
   githubUrl?: string | null
   healthScore?: number
   createdAt?: Date | string
+  auditRunId?: string | null
+  auditDecision?: string | null
+  auditScore?: number | null
+  governanceRisk?: number | null
+  architecturalIntegrity?: number | null
+  scalabilityReadiness?: number | null
+  requiresRevision?: boolean
+  driftPercentage?: number | null
+  refactorCostSprints?: number | null
+  blockingIssues?: Prisma.ProjectCreateblockingIssuesInput | string[]
+  chiefReasoning?: string | null
+  agentSummaries?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
 }
 
@@ -293,6 +465,18 @@ export type ProjectUncheckedCreateInput = {
   githubUrl?: string | null
   healthScore?: number
   createdAt?: Date | string
+  auditRunId?: string | null
+  auditDecision?: string | null
+  auditScore?: number | null
+  governanceRisk?: number | null
+  architecturalIntegrity?: number | null
+  scalabilityReadiness?: number | null
+  requiresRevision?: boolean
+  driftPercentage?: number | null
+  refactorCostSprints?: number | null
+  blockingIssues?: Prisma.ProjectCreateblockingIssuesInput | string[]
+  chiefReasoning?: string | null
+  agentSummaries?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
 }
 
@@ -303,6 +487,18 @@ export type ProjectUpdateInput = {
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   healthScore?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  auditRunId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  auditDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  auditScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  governanceRisk?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  architecturalIntegrity?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  scalabilityReadiness?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  requiresRevision?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  driftPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  refactorCostSprints?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  blockingIssues?: Prisma.ProjectUpdateblockingIssuesInput | string[]
+  chiefReasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agentSummaries?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
 }
 
@@ -313,6 +509,18 @@ export type ProjectUncheckedUpdateInput = {
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   healthScore?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  auditRunId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  auditDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  auditScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  governanceRisk?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  architecturalIntegrity?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  scalabilityReadiness?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  requiresRevision?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  driftPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  refactorCostSprints?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  blockingIssues?: Prisma.ProjectUpdateblockingIssuesInput | string[]
+  chiefReasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agentSummaries?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
 }
 
@@ -323,6 +531,18 @@ export type ProjectCreateManyInput = {
   githubUrl?: string | null
   healthScore?: number
   createdAt?: Date | string
+  auditRunId?: string | null
+  auditDecision?: string | null
+  auditScore?: number | null
+  governanceRisk?: number | null
+  architecturalIntegrity?: number | null
+  scalabilityReadiness?: number | null
+  requiresRevision?: boolean
+  driftPercentage?: number | null
+  refactorCostSprints?: number | null
+  blockingIssues?: Prisma.ProjectCreateblockingIssuesInput | string[]
+  chiefReasoning?: string | null
+  agentSummaries?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type ProjectUpdateManyMutationInput = {
@@ -332,6 +552,18 @@ export type ProjectUpdateManyMutationInput = {
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   healthScore?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  auditRunId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  auditDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  auditScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  governanceRisk?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  architecturalIntegrity?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  scalabilityReadiness?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  requiresRevision?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  driftPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  refactorCostSprints?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  blockingIssues?: Prisma.ProjectUpdateblockingIssuesInput | string[]
+  chiefReasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agentSummaries?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type ProjectUncheckedUpdateManyInput = {
@@ -341,6 +573,26 @@ export type ProjectUncheckedUpdateManyInput = {
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   healthScore?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  auditRunId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  auditDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  auditScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  governanceRisk?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  architecturalIntegrity?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  scalabilityReadiness?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  requiresRevision?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  driftPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  refactorCostSprints?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  blockingIssues?: Prisma.ProjectUpdateblockingIssuesInput | string[]
+  chiefReasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agentSummaries?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+}
+
+export type StringNullableListFilter<$PrismaModel = never> = {
+  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
+  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
 }
 
 export type ProjectCountOrderByAggregateInput = {
@@ -350,10 +602,28 @@ export type ProjectCountOrderByAggregateInput = {
   githubUrl?: Prisma.SortOrder
   healthScore?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  auditRunId?: Prisma.SortOrder
+  auditDecision?: Prisma.SortOrder
+  auditScore?: Prisma.SortOrder
+  governanceRisk?: Prisma.SortOrder
+  architecturalIntegrity?: Prisma.SortOrder
+  scalabilityReadiness?: Prisma.SortOrder
+  requiresRevision?: Prisma.SortOrder
+  driftPercentage?: Prisma.SortOrder
+  refactorCostSprints?: Prisma.SortOrder
+  blockingIssues?: Prisma.SortOrder
+  chiefReasoning?: Prisma.SortOrder
+  agentSummaries?: Prisma.SortOrder
 }
 
 export type ProjectAvgOrderByAggregateInput = {
   healthScore?: Prisma.SortOrder
+  auditScore?: Prisma.SortOrder
+  governanceRisk?: Prisma.SortOrder
+  architecturalIntegrity?: Prisma.SortOrder
+  scalabilityReadiness?: Prisma.SortOrder
+  driftPercentage?: Prisma.SortOrder
+  refactorCostSprints?: Prisma.SortOrder
 }
 
 export type ProjectMaxOrderByAggregateInput = {
@@ -363,6 +633,16 @@ export type ProjectMaxOrderByAggregateInput = {
   githubUrl?: Prisma.SortOrder
   healthScore?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  auditRunId?: Prisma.SortOrder
+  auditDecision?: Prisma.SortOrder
+  auditScore?: Prisma.SortOrder
+  governanceRisk?: Prisma.SortOrder
+  architecturalIntegrity?: Prisma.SortOrder
+  scalabilityReadiness?: Prisma.SortOrder
+  requiresRevision?: Prisma.SortOrder
+  driftPercentage?: Prisma.SortOrder
+  refactorCostSprints?: Prisma.SortOrder
+  chiefReasoning?: Prisma.SortOrder
 }
 
 export type ProjectMinOrderByAggregateInput = {
@@ -372,15 +652,52 @@ export type ProjectMinOrderByAggregateInput = {
   githubUrl?: Prisma.SortOrder
   healthScore?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  auditRunId?: Prisma.SortOrder
+  auditDecision?: Prisma.SortOrder
+  auditScore?: Prisma.SortOrder
+  governanceRisk?: Prisma.SortOrder
+  architecturalIntegrity?: Prisma.SortOrder
+  scalabilityReadiness?: Prisma.SortOrder
+  requiresRevision?: Prisma.SortOrder
+  driftPercentage?: Prisma.SortOrder
+  refactorCostSprints?: Prisma.SortOrder
+  chiefReasoning?: Prisma.SortOrder
 }
 
 export type ProjectSumOrderByAggregateInput = {
   healthScore?: Prisma.SortOrder
+  auditScore?: Prisma.SortOrder
+  governanceRisk?: Prisma.SortOrder
+  architecturalIntegrity?: Prisma.SortOrder
+  scalabilityReadiness?: Prisma.SortOrder
+  driftPercentage?: Prisma.SortOrder
+  refactorCostSprints?: Prisma.SortOrder
 }
 
 export type ProjectScalarRelationFilter = {
   is?: Prisma.ProjectWhereInput
   isNot?: Prisma.ProjectWhereInput
+}
+
+export type ProjectCreateblockingIssuesInput = {
+  set: string[]
+}
+
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
+export type ProjectUpdateblockingIssuesInput = {
+  set?: string[]
+  push?: string | string[]
 }
 
 export type ProjectCreateNestedOneWithoutTasksInput = {
@@ -404,6 +721,18 @@ export type ProjectCreateWithoutTasksInput = {
   githubUrl?: string | null
   healthScore?: number
   createdAt?: Date | string
+  auditRunId?: string | null
+  auditDecision?: string | null
+  auditScore?: number | null
+  governanceRisk?: number | null
+  architecturalIntegrity?: number | null
+  scalabilityReadiness?: number | null
+  requiresRevision?: boolean
+  driftPercentage?: number | null
+  refactorCostSprints?: number | null
+  blockingIssues?: Prisma.ProjectCreateblockingIssuesInput | string[]
+  chiefReasoning?: string | null
+  agentSummaries?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type ProjectUncheckedCreateWithoutTasksInput = {
@@ -413,6 +742,18 @@ export type ProjectUncheckedCreateWithoutTasksInput = {
   githubUrl?: string | null
   healthScore?: number
   createdAt?: Date | string
+  auditRunId?: string | null
+  auditDecision?: string | null
+  auditScore?: number | null
+  governanceRisk?: number | null
+  architecturalIntegrity?: number | null
+  scalabilityReadiness?: number | null
+  requiresRevision?: boolean
+  driftPercentage?: number | null
+  refactorCostSprints?: number | null
+  blockingIssues?: Prisma.ProjectCreateblockingIssuesInput | string[]
+  chiefReasoning?: string | null
+  agentSummaries?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type ProjectCreateOrConnectWithoutTasksInput = {
@@ -438,6 +779,18 @@ export type ProjectUpdateWithoutTasksInput = {
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   healthScore?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  auditRunId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  auditDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  auditScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  governanceRisk?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  architecturalIntegrity?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  scalabilityReadiness?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  requiresRevision?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  driftPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  refactorCostSprints?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  blockingIssues?: Prisma.ProjectUpdateblockingIssuesInput | string[]
+  chiefReasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agentSummaries?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type ProjectUncheckedUpdateWithoutTasksInput = {
@@ -447,6 +800,18 @@ export type ProjectUncheckedUpdateWithoutTasksInput = {
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   healthScore?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  auditRunId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  auditDecision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  auditScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  governanceRisk?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  architecturalIntegrity?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  scalabilityReadiness?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  requiresRevision?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  driftPercentage?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  refactorCostSprints?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  blockingIssues?: Prisma.ProjectUpdateblockingIssuesInput | string[]
+  chiefReasoning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  agentSummaries?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 
@@ -487,6 +852,18 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   githubUrl?: boolean
   healthScore?: boolean
   createdAt?: boolean
+  auditRunId?: boolean
+  auditDecision?: boolean
+  auditScore?: boolean
+  governanceRisk?: boolean
+  architecturalIntegrity?: boolean
+  scalabilityReadiness?: boolean
+  requiresRevision?: boolean
+  driftPercentage?: boolean
+  refactorCostSprints?: boolean
+  blockingIssues?: boolean
+  chiefReasoning?: boolean
+  agentSummaries?: boolean
   tasks?: boolean | Prisma.Project$tasksArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
@@ -498,6 +875,18 @@ export type ProjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   githubUrl?: boolean
   healthScore?: boolean
   createdAt?: boolean
+  auditRunId?: boolean
+  auditDecision?: boolean
+  auditScore?: boolean
+  governanceRisk?: boolean
+  architecturalIntegrity?: boolean
+  scalabilityReadiness?: boolean
+  requiresRevision?: boolean
+  driftPercentage?: boolean
+  refactorCostSprints?: boolean
+  blockingIssues?: boolean
+  chiefReasoning?: boolean
+  agentSummaries?: boolean
 }, ExtArgs["result"]["project"]>
 
 export type ProjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -507,6 +896,18 @@ export type ProjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   githubUrl?: boolean
   healthScore?: boolean
   createdAt?: boolean
+  auditRunId?: boolean
+  auditDecision?: boolean
+  auditScore?: boolean
+  governanceRisk?: boolean
+  architecturalIntegrity?: boolean
+  scalabilityReadiness?: boolean
+  requiresRevision?: boolean
+  driftPercentage?: boolean
+  refactorCostSprints?: boolean
+  blockingIssues?: boolean
+  chiefReasoning?: boolean
+  agentSummaries?: boolean
 }, ExtArgs["result"]["project"]>
 
 export type ProjectSelectScalar = {
@@ -516,9 +917,21 @@ export type ProjectSelectScalar = {
   githubUrl?: boolean
   healthScore?: boolean
   createdAt?: boolean
+  auditRunId?: boolean
+  auditDecision?: boolean
+  auditScore?: boolean
+  governanceRisk?: boolean
+  architecturalIntegrity?: boolean
+  scalabilityReadiness?: boolean
+  requiresRevision?: boolean
+  driftPercentage?: boolean
+  refactorCostSprints?: boolean
+  blockingIssues?: boolean
+  chiefReasoning?: boolean
+  agentSummaries?: boolean
 }
 
-export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "githubUrl" | "healthScore" | "createdAt", ExtArgs["result"]["project"]>
+export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "githubUrl" | "healthScore" | "createdAt" | "auditRunId" | "auditDecision" | "auditScore" | "governanceRisk" | "architecturalIntegrity" | "scalabilityReadiness" | "requiresRevision" | "driftPercentage" | "refactorCostSprints" | "blockingIssues" | "chiefReasoning" | "agentSummaries", ExtArgs["result"]["project"]>
 export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tasks?: boolean | Prisma.Project$tasksArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
@@ -538,6 +951,18 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     githubUrl: string | null
     healthScore: number
     createdAt: Date
+    auditRunId: string | null
+    auditDecision: string | null
+    auditScore: number | null
+    governanceRisk: number | null
+    architecturalIntegrity: number | null
+    scalabilityReadiness: number | null
+    requiresRevision: boolean
+    driftPercentage: number | null
+    refactorCostSprints: number | null
+    blockingIssues: string[]
+    chiefReasoning: string | null
+    agentSummaries: runtime.JsonValue | null
   }, ExtArgs["result"]["project"]>
   composites: {}
 }
@@ -968,6 +1393,18 @@ export interface ProjectFieldRefs {
   readonly githubUrl: Prisma.FieldRef<"Project", 'String'>
   readonly healthScore: Prisma.FieldRef<"Project", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Project", 'DateTime'>
+  readonly auditRunId: Prisma.FieldRef<"Project", 'String'>
+  readonly auditDecision: Prisma.FieldRef<"Project", 'String'>
+  readonly auditScore: Prisma.FieldRef<"Project", 'Float'>
+  readonly governanceRisk: Prisma.FieldRef<"Project", 'Float'>
+  readonly architecturalIntegrity: Prisma.FieldRef<"Project", 'Float'>
+  readonly scalabilityReadiness: Prisma.FieldRef<"Project", 'Float'>
+  readonly requiresRevision: Prisma.FieldRef<"Project", 'Boolean'>
+  readonly driftPercentage: Prisma.FieldRef<"Project", 'Float'>
+  readonly refactorCostSprints: Prisma.FieldRef<"Project", 'Float'>
+  readonly blockingIssues: Prisma.FieldRef<"Project", 'String[]'>
+  readonly chiefReasoning: Prisma.FieldRef<"Project", 'String'>
+  readonly agentSummaries: Prisma.FieldRef<"Project", 'Json'>
 }
     
 

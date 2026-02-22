@@ -34,6 +34,19 @@ model Project {
   healthScore Int      @default(100)
   tasks       Task[]
   createdAt   DateTime @default(now())
+
+  auditRunId              String?
+  auditDecision           String?   // APPROVE | REVISE | REJECT
+  auditScore              Float?
+  governanceRisk          Float?
+  architecturalIntegrity  Float?
+  scalabilityReadiness    Float?
+  requiresRevision        Boolean   @default(false)
+  driftPercentage         Float?
+  refactorCostSprints     Float?
+  blockingIssues          String[]
+  chiefReasoning          String?
+  agentSummaries          Json?
 }
 
 model Task {

@@ -42,7 +42,7 @@ export const materializeGitHubRepo = async (token, repoName, fileData) => {
     const { data: commit } = await octokit.git.createCommit({
       owner,
       repo: name,
-      message: "🚀 Aether-OS: Initial Architectural Materialization",
+      message: "Aristotle file",
       tree: tree.sha,
       parents: [latestCommitSha],
     });

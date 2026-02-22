@@ -2,19 +2,17 @@ import prisma from "../src/prisma/client.js";
 import { Priority, Status } from "../src/generated/prisma/enums.ts";
 
 async function main() {
+  await prisma.subtask.deleteMany(); // Clean subtasks first to avoid foreign key issues
   await prisma.task.deleteMany();
   await prisma.project.deleteMany();
-  console.log("🌱 Sentinel is seeding the database...");
+  console.log("🌱 Sentinel is seeding the database with user assignments...");
 
-  // 1. Create a Dummy User (The Developer)
-  const user = {
-    id: "cmlxaqlme00011wez81ogqr1d",
-  };
+  // 1. Target User ID
+  const userId = "cmlxs2ett00001eev8ripcidp";
 
-  // 2. Create a "GenAI Project" with nested Tasks and Subtasks
   const now = new Date();
 
-  // 3. PROJECT A: THE AI PROJECT (Active & High Stakes)
+  // 3. PROJECT A: THE AI PROJECT
   await prisma.project.create({
     data: {
       name: "Aether-OS Core",
@@ -30,7 +28,8 @@ async function main() {
               "Finalize the debate logic between Architect and Security agents.",
             status: Status.IN_PROGRESS,
             difficulty: "Hard",
-            dueDate: new Date(now.getTime() + 2 * 24 * 60 * 60 * 1000), // 2 days from now
+            dueDate: new Date(now.getTime() + 2 * 24 * 60 * 60 * 1000),
+            assigneeId: userId, // ✅ TASK ASSIGNED TO USER
             subtasks: {
               create: [
                 {
@@ -38,7 +37,7 @@ async function main() {
                   bounty: 50,
                   priority: Priority.HIGH,
                   status: Status.COMPLETED,
-                  assigneeId: user.id,
+                  assigneeId: userId,
                 },
                 {
                   title: "Implement JSON Schema Validation",
@@ -61,7 +60,8 @@ async function main() {
               "Connect the Materialization service to GitHub Octokit.",
             status: Status.OPEN,
             difficulty: "Medium",
-            dueDate: new Date(now.getTime() - 1 * 24 * 60 * 60 * 1000), // OVERDUE by 1 day
+            dueDate: new Date(now.getTime() - 1 * 24 * 60 * 60 * 1000),
+            // Unassigned task to show "available" work
             subtasks: {
               create: [
                 {
@@ -84,7 +84,7 @@ async function main() {
     },
   });
 
-  // 4. PROJECT B: THE FINTECH PROJECT (Bounty Heavy)
+  // 4. PROJECT B: THE FINTECH PROJECT
   await prisma.project.create({
     data: {
       name: "Lumina Pay",
@@ -98,13 +98,14 @@ async function main() {
             description: "Internal audit of the bounty distribution contract.",
             status: Status.OPEN,
             difficulty: "Hard",
+            assigneeId: userId, // ✅ TASK ASSIGNED TO USER
             dueDate: new Date(now.getTime() + 10 * 24 * 60 * 60 * 1000),
             subtasks: {
               create: [
                 {
                   title: "Re-entrancy Check",
                   bounty: 300,
-                  priority: Priority.CRITICAL || Priority.HIGH,
+                  priority: Priority.HIGH,
                   status: Status.OPEN,
                 },
                 {
@@ -121,7 +122,7 @@ async function main() {
     },
   });
 
-  // 5. PROJECT C: THE COMPLETED PROJECT (Health = 100)
+  // 5. PROJECT C: THE COMPLETED PROJECT
   await prisma.project.create({
     data: {
       name: "Nexus Docs",
@@ -135,6 +136,7 @@ async function main() {
             description: "Release initial documentation parser.",
             status: Status.COMPLETED,
             difficulty: "Easy",
+            assigneeId: userId, // ✅ TASK ASSIGNED TO USER
             dueDate: new Date(now.getTime() - 20 * 24 * 60 * 60 * 1000),
             subtasks: {
               create: [
@@ -143,14 +145,14 @@ async function main() {
                   bounty: 100,
                   priority: Priority.HIGH,
                   status: Status.COMPLETED,
-                  assigneeId: user.id,
+                  assigneeId: userId,
                 },
                 {
                   title: "CLI Tooling",
                   bounty: 50,
                   priority: Priority.MEDIUM,
                   status: Status.COMPLETED,
-                  assigneeId: user.id,
+                  assigneeId: userId,
                 },
               ],
             },
