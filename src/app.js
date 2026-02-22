@@ -20,6 +20,7 @@ const io = new Server(httpServer, {
   cors: {
     origin: process.env.FRONTEND,
     methods: ["GET", "POST"],
+    credentials: true,
   },
 });
 
