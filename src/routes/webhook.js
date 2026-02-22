@@ -60,6 +60,7 @@ router.post("/github-push", async (req, res) => {
         commitHash: after.substring(0, 7),
         author: payload.pusher.name,
         timestamp: new Date(),
+        comparison,
       });
       console.log(`📡 Live review pushed to room: ${project.id}`);
     }
