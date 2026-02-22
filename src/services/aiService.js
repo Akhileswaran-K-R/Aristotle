@@ -2,24 +2,15 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-export const generateProjectRoadmap = async (prompt) => {
+export const generateAIResponse = async (prompt, isFinal = false) => {
+  // Use Gemini 3 Flash for the fastest, most capable agentic reasoning
   const model = genAI.getGenerativeModel({
-    model: "gemini-2.5-flash",
-    generationConfig: { responseMimeType: "application/json" },
+    model: "gemini-3-flash",
+    generationConfig: isFinal ? { responseMimeType: "application/json" } : {},
   });
 
-  const systemInstruction = `
-    You are the Aether-OS Sentinel Mentor, a Senior Software Architect. 
-    Analyze the user's startup idea and output a JSON object with:
-    1. 'files': A map of file paths to initial boilerplate code.
-    2. 'tasks': An array of objects with 'title', 'description', 'bounty' (integer 50-500), and 'difficulty'.
-    3. 'summary': A brief architectural overview.
-    
-    Focus on a modern stack: Vite/React frontend, Node.js backend, and Prisma.
-  `;
+  const result = await model.generateContent(prompt);
+  const text = result.response.text();
 
-  const result = await model.generateContent(
-    `${systemInstruction}\n\nUser Idea: ${prompt}`,
-  );
-  return JSON.parse(result.response.text());
+  return isFinal ? JSON.parse(text) : text;
 };

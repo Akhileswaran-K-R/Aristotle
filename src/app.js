@@ -12,7 +12,14 @@ import projectRoutes from "./routes/project.js";
 const app = express();
 
 // Middleware
-app.use(cors({ origin: `${process.env.FRONTEND}`, credentials: true }));
+app.use(
+  cors({
+    origin: `${process.env.FRONTEND}`,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
 app.use(express.json());
 app.use(
   session({
@@ -27,6 +34,8 @@ app.use(
     },
   }),
 );
+
+app.options(/.*/, cors());
 
 // Initialize Passport
 configurePassport();

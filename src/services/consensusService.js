@@ -1,25 +1,28 @@
-// src/services/consensusService.js
-import { generateAIResponse } from "./aiService.js";
+import { generateAIResponse } from "./aiService.js"; // Refactor your existing code into a generic helper
 
 export const getConsensusArchitecture = async (userIdea) => {
-  // 1. Initial Draft (The Performance Optimist)
-  const draft = await generateAIResponse(
-    userIdea,
-    "You are a Performance Specialist. Focus on speed.",
-  );
+  console.log("🚀 Starting Agentic Debate for:", userIdea);
 
-  // 2. The Critique (The Security Sentinel)
-  const securityCritique = await generateAIResponse(
-    `Critique this architecture for security flaws: ${draft}`,
-    "You are a Cyber Security Expert.",
-  );
+  // 1. PHASE 1: The Performance Architect (Initial Draft)
+  const architectPrompt = `You are a Senior Performance Architect. Propose a high-level file structure and task list for this idea: "${userIdea}". Focus on speed, clean code, and modern libraries.`;
+  const draft = await generateAIResponse(architectPrompt);
 
-  // 3. The Refinement (The Pragmatic CTO)
-  const finalConsensus = await generateAIResponse(
-    `Initial Idea: ${userIdea}\nDraft: ${draft}\nSecurity Feedback: ${securityCritique}\n
-     Create a final, balanced JSON architecture that addresses the feedback.`,
-    "You are a Pragmatic CTO. Create the final consensus.",
-  );
+  // 2. PHASE 2: The Security Sentinel (Critique)
+  const securityPrompt = `You are a Cyber Security Auditor. Review the following architecture for vulnerabilities, data leaks, and bad auth patterns: ${JSON.stringify(draft)}. List only critical flaws and required fixes.`;
+  const securityCritique = await generateAIResponse(securityPrompt);
 
-  return JSON.parse(finalConsensus);
+  // 3. PHASE 3: The Consolidator (Final Consensus)
+  // This agent resolves the conflict and outputs the FINAL JSON
+  const finalPrompt = `
+    User Idea: ${userIdea}
+    Initial Draft: ${JSON.stringify(draft)}
+    Security Critique: ${JSON.stringify(securityCritique)}
+    
+    You are the Pragmatic CTO. Resolve the conflicts above. 
+    Create a FINAL, balanced JSON architecture that implements the best of both worlds.
+    Output MUST be valid JSON for Aether-OS materialization.
+  `;
+
+  const finalConsensus = await generateAIResponse(finalPrompt, true); // True flag for structured JSON output
+  return finalConsensus;
 };
