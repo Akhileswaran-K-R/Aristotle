@@ -1,4 +1,5 @@
 import prisma from "../src/prisma/client.js";
+import { Priority, Status } from "../src/generated/prisma/enums.ts";
 
 async function main() {
   await prisma.task.deleteMany();
@@ -7,69 +8,73 @@ async function main() {
 
   // 1. Create a Dummy User (The Developer)
   const user = {
-    id: "cmlx8cwfb0000psvnid65ptj9",
+    id: "cmlxaqlme00011wez81ogqr1d",
   };
 
   // 2. Create a "GenAI Project" with nested Tasks and Subtasks
-  const project = await prisma.project.create({
+  const now = new Date();
+
+  // 3. PROJECT A: THE AI PROJECT (Active & High Stakes)
+  await prisma.project.create({
     data: {
       name: "Aether-OS Core",
       description:
-        "AI-augmented project management for high-velocity startups.",
+        "AI-augmented project management. Building the Sentinel engine.",
       githubUrl: "https://github.com/SkelluAKR/Aether-OS",
-      healthScore: 85,
+      healthScore: 78,
       tasks: {
         create: [
           {
-            title: "Architecture Materialization",
+            title: "Phase 1: Multi-Agent Consensus",
             description:
-              "Implementing the GitHub API bridge for automated repo creation.",
-            status: "IN_PROGRESS",
+              "Finalize the debate logic between Architect and Security agents.",
+            status: Status.IN_PROGRESS,
             difficulty: "Hard",
-            dueDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), // 3 days from now
-            assigneeId: user.id,
+            dueDate: new Date(now.getTime() + 2 * 24 * 60 * 60 * 1000), // 2 days from now
             subtasks: {
               create: [
                 {
-                  title: "Octokit Tree API Integration",
-                  description: "Handle multi-file commits without plugins.",
-                  bounty: 150,
-                  priority: "HIGH",
-                  status: "COMPLETED",
+                  title: "Refine System Prompts",
+                  bounty: 50,
+                  priority: Priority.HIGH,
+                  status: Status.COMPLETED,
                   assigneeId: user.id,
                 },
                 {
-                  title: "GitHub Webhook HMAC Security",
-                  description: "Verify signatures to prevent spoofing.",
+                  title: "Implement JSON Schema Validation",
                   bounty: 100,
-                  priority: "MEDIUM",
-                  status: "OPEN",
+                  priority: Priority.HIGH,
+                  status: Status.OPEN,
+                },
+                {
+                  title: "Rate Limiting for Gemini API",
+                  bounty: 30,
+                  priority: Priority.LOW,
+                  status: Status.OPEN,
                 },
               ],
             },
           },
           {
-            title: "Sentinel Multi-Agent Consensus",
-            description: "Coordinate the Architect and Security agents.",
-            status: "OPEN",
+            title: "Phase 2: GitHub Bridge",
+            description:
+              "Connect the Materialization service to GitHub Octokit.",
+            status: Status.OPEN,
             difficulty: "Medium",
-            dueDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000), // 5 days from now
+            dueDate: new Date(now.getTime() - 1 * 24 * 60 * 60 * 1000), // OVERDUE by 1 day
             subtasks: {
               create: [
                 {
-                  title: "Prompt Engineering for Consolidator",
-                  description: "Refine the CTO agent's output format.",
-                  bounty: 75,
-                  priority: "MEDIUM",
-                  status: "OPEN",
+                  title: "Webhook Secret Verification",
+                  bounty: 80,
+                  priority: Priority.MEDIUM,
+                  status: Status.OPEN,
                 },
                 {
-                  title: "Async Agent Pipeline",
-                  description:
-                    "Handle long-running LLM calls in the background.",
-                  bounty: 125,
-                  priority: "HIGH",
-                  status: "OPEN",
+                  title: "Repo Template Setup",
+                  bounty: 40,
+                  priority: Priority.MEDIUM,
+                  status: Status.OPEN,
                 },
               ],
             },
@@ -79,7 +84,81 @@ async function main() {
     },
   });
 
-  console.log(`✅ Seeded Project: ${project.name} with ID: ${project.id}`);
+  // 4. PROJECT B: THE FINTECH PROJECT (Bounty Heavy)
+  await prisma.project.create({
+    data: {
+      name: "Lumina Pay",
+      description: "DeFi payment gateway for micro-bounties.",
+      githubUrl: "https://github.com/SkelluAKR/Lumina",
+      healthScore: 92,
+      tasks: {
+        create: [
+          {
+            title: "Smart Contract Audit",
+            description: "Internal audit of the bounty distribution contract.",
+            status: Status.OPEN,
+            difficulty: "Hard",
+            dueDate: new Date(now.getTime() + 10 * 24 * 60 * 60 * 1000),
+            subtasks: {
+              create: [
+                {
+                  title: "Re-entrancy Check",
+                  bounty: 300,
+                  priority: Priority.CRITICAL || Priority.HIGH,
+                  status: Status.OPEN,
+                },
+                {
+                  title: "Gas Optimization",
+                  bounty: 150,
+                  priority: Priority.MEDIUM,
+                  status: Status.OPEN,
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  });
+
+  // 5. PROJECT C: THE COMPLETED PROJECT (Health = 100)
+  await prisma.project.create({
+    data: {
+      name: "Nexus Docs",
+      description: "Markdown documentation generator for startups.",
+      githubUrl: "https://github.com/SkelluAKR/Nexus",
+      healthScore: 100,
+      tasks: {
+        create: [
+          {
+            title: "MVP Launch",
+            description: "Release initial documentation parser.",
+            status: Status.COMPLETED,
+            difficulty: "Easy",
+            dueDate: new Date(now.getTime() - 20 * 24 * 60 * 60 * 1000),
+            subtasks: {
+              create: [
+                {
+                  title: "Markdown Parser",
+                  bounty: 100,
+                  priority: Priority.HIGH,
+                  status: Status.COMPLETED,
+                  assigneeId: user.id,
+                },
+                {
+                  title: "CLI Tooling",
+                  bounty: 50,
+                  priority: Priority.MEDIUM,
+                  status: Status.COMPLETED,
+                  assigneeId: user.id,
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  });
 }
 
 main()

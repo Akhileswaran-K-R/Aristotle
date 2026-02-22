@@ -115,23 +115,26 @@ router.get("/", async (req, res) => {
 
 // GET /projects/:id - Fetch a single project with full hierarchy
 router.get("/:id", async (req, res) => {
+  // 1. Auth Check
   if (!req.isAuthenticated()) {
     return res
       .status(401)
       .json({ message: "Sentinel requires authentication." });
   }
+
+  const { id } = req.params;
+  const now = new Date();
+
   try {
+    // 2. Fetch all data in one query
     const project = await prisma.project.findUnique({
-      where: { id: req.params.id },
+      where: { id },
       include: {
         tasks: {
           include: {
             subtasks: {
               include: {
-                assignee: {
-                  // Optionally include who is working on what subtask
-                  select: { name: true },
-                },
+                assignee: { select: { name: true } },
               },
             },
           },
@@ -141,7 +144,50 @@ router.get("/:id", async (req, res) => {
 
     if (!project) return res.status(404).json({ message: "Project not found" });
 
-    res.json(project);
+    // 3. Compute Sentinel Analytics
+    const tasks = project.tasks;
+    const totalTasks = tasks.length;
+
+    const completedTasksCount = tasks.filter(
+      (t) => t.status === "COMPLETED",
+    ).length;
+
+    // Logic for Overdue Tasks
+    const overdueTasks = tasks.filter(
+      (t) => t.status !== "COMPLETED" && t.dueDate && new Date(t.dueDate) < now,
+    );
+
+    // Logic for High Priority Focus
+    const criticalFocus = tasks
+      .map((task) => ({
+        taskId: task.id,
+        title: task.title,
+        dueDate: task.dueDate,
+        highPrioritySubtasks: task.subtasks.filter(
+          (s) => s.priority === "HIGH",
+        ),
+      }))
+      .filter((t) => t.highPrioritySubtasks.length > 0);
+
+    // 4. Combined Response Structure
+    res.json({
+      // Raw Project Data (for rendering the list/tree)
+      ...project,
+
+      // Sentinel Insights (for charts and banners)
+      analytics: {
+        stats: {
+          totalTasks,
+          completedTasks: completedTasksCount,
+          incompleteTasks: totalTasks - completedTasksCount,
+          overdueCount: overdueTasks.length,
+          completionRate:
+            totalTasks > 0 ? (completedTasksCount / totalTasks) * 100 : 0,
+        },
+        overdueTasks: overdueTasks.map((t) => ({ id: t.id, title: t.title })),
+        criticalFocus,
+      },
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
