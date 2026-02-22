@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            String   @id @default(cuid())
+  googleId      String   @unique
+  email         String   @unique
+  name          String?
+  walletBalance Int      @default(0)
+  tasks         Task[]   // Bounties claimed by this user
+  createdAt     DateTime @default(now())
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  githubUrl   String?
+  healthScore Int      @default(100)
+  tasks       Task[]
+  createdAt   DateTime @default(now())
+}
+
+model Task {
+  id           String   @id @default(cuid())
+  title        String
+  description  String?
+  bounty       Int      @default(0)
+  status       Status   @default(OPEN)
+  difficulty   String?  // Easy, Medium, Hard
+  projectId    String
+  project      Project  @relation(fields: [projectId], references: [id])
+  assigneeId   String?
+  assignee     User?    @relation(fields: [assigneeId], references: [id])
+  dependencies String[] // Array of task IDs
+}
+
+enum Status {
+  OPEN
+  CLAIMED
+  IN_PROGRESS
+  REVIEW
+  COMPLETED
+}
