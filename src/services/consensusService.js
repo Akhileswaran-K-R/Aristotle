@@ -15,12 +15,32 @@ export const getConsensusArchitecture = async (userIdea) => {
   // This agent resolves the conflict and outputs the FINAL JSON
   const finalPrompt = `
     User Idea: ${userIdea}
-    Initial Draft: ${JSON.stringify(draft)}
-    Security Critique: ${JSON.stringify(securityCritique)}
+    Architect Draft: ${draft}
+    Security Feedback: ${securityCritique}
     
-    You are the Pragmatic CTO. Resolve the conflicts above. 
-    Create a FINAL, balanced JSON architecture that implements the best of both worlds.
-    Output MUST be valid JSON for Aether-OS materialization.
+    You are the Pragmatic CTO. Resolve all conflicts and output the FINAL JSON.
+    
+    STRICT JSON STRUCTURE REQUIRED:
+    {
+      "summary": "...",
+      "files": { "path/to/file": "content" },
+      "tasks": [
+        {
+          "title": "...",
+          "description": "...",
+          "difficulty": "Easy|Medium|Hard",
+          "dueDate": "ISO string (3-7 days from now)",
+          "subtasks": [
+            {
+              "title": "...",
+              "description": "...",
+              "bounty": integer,
+              "priority": "LOW|MEDIUM|HIGH"
+            }
+          ]
+        }
+      ]
+    }
   `;
 
   const finalConsensus = await generateAIResponse(finalPrompt, true); // True flag for structured JSON output

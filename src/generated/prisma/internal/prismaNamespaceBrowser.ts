@@ -53,7 +53,8 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Project: 'Project',
-  Task: 'Task'
+  Task: 'Task',
+  Subtask: 'Subtask'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -100,15 +101,30 @@ export const TaskScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
-  bounty: 'bounty',
   status: 'status',
   difficulty: 'difficulty',
+  dueDate: 'dueDate',
   projectId: 'projectId',
   assigneeId: 'assigneeId',
-  dependencies: 'dependencies'
+  dependencies: 'dependencies',
+  createdAt: 'createdAt'
 } as const
 
 export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
+
+
+export const SubtaskScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  bounty: 'bounty',
+  priority: 'priority',
+  status: 'status',
+  taskId: 'taskId',
+  assigneeId: 'assigneeId'
+} as const
+
+export type SubtaskScalarFieldEnum = (typeof SubtaskScalarFieldEnum)[keyof typeof SubtaskScalarFieldEnum]
 
 
 export const SortOrder = {

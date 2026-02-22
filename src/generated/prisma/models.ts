@@ -11,4 +11,5 @@
 export type * from './models/User.ts'
 export type * from './models/Project.ts'
 export type * from './models/Task.ts'
+export type * from './models/Subtask.ts'
 export type * from './commonInputTypes.ts'
