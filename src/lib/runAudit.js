@@ -1,7 +1,7 @@
 const FASTAPI_BASE = process.env.FASTAPI_BASE_URL;
 console.log(FASTAPI_BASE);
 const POLL_INTERVAL_MS = 4000;
-const MAX_ATTEMPTS = 60; // 4 minutes max (audit pipeline is slow)
+const MAX_ATTEMPTS = 600; // 4 minutes max (audit pipeline is slow)
 
 export const runAudit = async (payload) => {
   // 1. Start the job
