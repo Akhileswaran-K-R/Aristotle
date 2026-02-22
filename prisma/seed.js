@@ -2,24 +2,45 @@ import prisma from "../src/prisma/client.js";
 import { Priority, Status } from "../src/generated/prisma/enums.ts";
 
 async function main() {
-  await prisma.subtask.deleteMany(); // Clean subtasks first to avoid foreign key issues
+  // 1. Clean up existing data (Order matters for Foreign Keys)
+  await prisma.subtask.deleteMany();
   await prisma.task.deleteMany();
   await prisma.project.deleteMany();
-  console.log("🌱 Sentinel is seeding the database with user assignments...");
 
-  // 1. Target User ID
+  console.log(
+    "🌱 Sentinel is seeding the database with Governance & Audit data...",
+  );
+
   const userId = "cmlxs2ett00001eev8ripcidp";
-
   const now = new Date();
 
-  // 3. PROJECT A: THE AI PROJECT
+  // 2. PROJECT A: AI PROJECT (Detailed Audit Data)
   await prisma.project.create({
     data: {
-      name: "Aether-OS Core",
-      description:
-        "AI-augmented project management. Building the Sentinel engine.",
-      githubUrl: "https://github.com/SkelluAKR/Aether-OS",
+      name: "Ecommerce",
+      description: "AI-augmented IV management. Building the Sentinel engine.",
+      githubUrl: "https://github.com/SkelluAKR/E-commerce1",
       healthScore: 78,
+      // --- New Schema Fields ---
+      auditDecision: "APPROVE",
+      auditScore: 88.5,
+      governanceRisk: 12.0,
+      architecturalIntegrity: 95.0,
+      scalabilityReadiness: 82.0,
+      driftPercentage: 5.4,
+      refactorCostSprints: 1.5,
+      blockingIssues: ["Incomplete JSON Schema for Agent handoffs"],
+      chiefReasoning:
+        "The multi-agent consensus protocol is robust, but the lack of strict schema validation between the Architect and Security agents could lead to drift.",
+      agentSummaries: {
+        architect:
+          "Solid monorepo structure, but needs better dependency management.",
+        security:
+          "Auth flow is secure; recommended adding rate limiting to prevent API abuse.",
+        sentinel:
+          "High performance potential. Milestone 1 is critical for stability.",
+      },
+      // --------------------------
       tasks: {
         create: [
           {
@@ -29,7 +50,7 @@ async function main() {
             status: Status.IN_PROGRESS,
             difficulty: "Hard",
             dueDate: new Date(now.getTime() + 2 * 24 * 60 * 60 * 1000),
-            assigneeId: userId, // ✅ TASK ASSIGNED TO USER
+            assigneeId: userId,
             subtasks: {
               create: [
                 {
@@ -45,37 +66,6 @@ async function main() {
                   priority: Priority.HIGH,
                   status: Status.OPEN,
                 },
-                {
-                  title: "Rate Limiting for Gemini API",
-                  bounty: 30,
-                  priority: Priority.LOW,
-                  status: Status.OPEN,
-                },
-              ],
-            },
-          },
-          {
-            title: "Phase 2: GitHub Bridge",
-            description:
-              "Connect the Materialization service to GitHub Octokit.",
-            status: Status.OPEN,
-            difficulty: "Medium",
-            dueDate: new Date(now.getTime() - 1 * 24 * 60 * 60 * 1000),
-            // Unassigned task to show "available" work
-            subtasks: {
-              create: [
-                {
-                  title: "Webhook Secret Verification",
-                  bounty: 80,
-                  priority: Priority.MEDIUM,
-                  status: Status.OPEN,
-                },
-                {
-                  title: "Repo Template Setup",
-                  bounty: 40,
-                  priority: Priority.MEDIUM,
-                  status: Status.OPEN,
-                },
               ],
             },
           },
@@ -84,13 +74,25 @@ async function main() {
     },
   });
 
-  // 4. PROJECT B: THE FINTECH PROJECT
+  // 3. PROJECT B: FINTECH PROJECT (Needs Revision / High Risk)
   await prisma.project.create({
     data: {
       name: "Lumina Pay",
       description: "DeFi payment gateway for micro-bounties.",
       githubUrl: "https://github.com/SkelluAKR/Lumina",
-      healthScore: 92,
+      healthScore: 65,
+      // --- New Schema Fields ---
+      auditDecision: "REVISE",
+      auditScore: 62.0,
+      governanceRisk: 45.0,
+      requiresRevision: true,
+      blockingIssues: [
+        "Critical Re-entrancy risk in Smart Contract",
+        "Insufficient logging",
+      ],
+      chiefReasoning:
+        "Financial transactions require higher audit coverage. Security agent detected potential overflow in bounty distribution.",
+      // --------------------------
       tasks: {
         create: [
           {
@@ -98,8 +100,8 @@ async function main() {
             description: "Internal audit of the bounty distribution contract.",
             status: Status.OPEN,
             difficulty: "Hard",
-            assigneeId: userId, // ✅ TASK ASSIGNED TO USER
-            dueDate: new Date(now.getTime() + 10 * 24 * 60 * 60 * 1000),
+            assigneeId: userId,
+            dueDate: new Date(now.getTime() + 5 * 24 * 60 * 60 * 1000),
             subtasks: {
               create: [
                 {
@@ -122,31 +124,24 @@ async function main() {
     },
   });
 
-  // 5. PROJECT C: THE COMPLETED PROJECT
+  // 4. PROJECT C: COMPLETED PROJECT
   await prisma.project.create({
     data: {
       name: "Nexus Docs",
       description: "Markdown documentation generator for startups.",
-      githubUrl: "https://github.com/SkelluAKR/Nexus",
       healthScore: 100,
+      auditDecision: "APPROVE",
+      auditScore: 98.0,
+      governanceRisk: 2.0,
       tasks: {
         create: [
           {
             title: "MVP Launch",
-            description: "Release initial documentation parser.",
             status: Status.COMPLETED,
-            difficulty: "Easy",
-            assigneeId: userId, // ✅ TASK ASSIGNED TO USER
-            dueDate: new Date(now.getTime() - 20 * 24 * 60 * 60 * 1000),
+            assigneeId: userId,
+            dueDate: new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000),
             subtasks: {
               create: [
-                {
-                  title: "Markdown Parser",
-                  bounty: 100,
-                  priority: Priority.HIGH,
-                  status: Status.COMPLETED,
-                  assigneeId: userId,
-                },
                 {
                   title: "CLI Tooling",
                   bounty: 50,

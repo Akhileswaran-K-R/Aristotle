@@ -8,6 +8,7 @@ import { configurePassport } from "./config/passport.js";
 // Import Route Files
 import authRoutes from "./routes/auth.js";
 import projectRoutes from "./routes/project.js";
+import githubRoutes from "./routes/github.js";
 
 const app = express();
 
@@ -54,6 +55,7 @@ app.use(passport.session());
 // Use Routes
 app.use("/auth", authRoutes);
 app.use("/projects", projectRoutes);
+app.use("/github", githubRoutes);
 
 app.get("/", (req, res) => {
   res.send("🚀 Aether-OS API is active!");
