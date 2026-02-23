@@ -129,22 +129,13 @@ router.post("/generate", async (req, res) => {
 
 // GET /projects - Fetch all projects for the logged-in user
 router.get("/", async (req, res) => {
-  if (!req.isAuthenticated()) {
-    return res
-      .status(401)
-      .json({ message: "Sentinel requires authentication." });
-  }
+  // if (!req.isAuthenticated()) {
+  //   return res
+  //     .status(401)
+  //     .json({ message: "Sentinel requires authentication." });
+  // }
   try {
-    const userId = req.user.id;
-
     const projects = await prisma.project.findMany({
-      where: {
-        tasks: {
-          some: {
-            assigneeId: userId,
-          },
-        },
-      },
       include: {
         tasks: {
           orderBy: { dueDate: "asc" }, // Order tasks by urgency
